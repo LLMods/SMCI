@@ -7,5 +7,7 @@ end
 
 post '/payload' do
   push = JSON.parse(request.body.read)
-  puts "JSON!!!! #{push.inspect}"
+  File.open('some_file.txt', 'w') do |f|
+    f.write("JSON!!! #{push.inspect}")
+  end
 end
