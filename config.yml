@@ -1,0 +1,13 @@
+---
+ environment: production
+ chdir: /home/minecraft/public_html
+ address: 0.0.0.0
+ user: minecraft
+ port: 8080
+ pid: /home/minecraft/public_html/thin.pid
+ rackup: /home/minecraft/public_html/config.ru
+ log: /home/minecraft/public_html/thin.log
+ max_conns: 1024
+ timeout: 30
+ max_persistent_conns: 512
+ daemonize: true
