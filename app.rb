@@ -21,7 +21,15 @@ post '/payload' do
   repo = JSON.parse(request_body)['repository']
 
   # Now let's manage everything in a separate thread
-  
+  Thread.new do
+    Dir.chdir('/home/minecraft/llmods') do
+      `git clone #{repo['git_url']}` unless File.directory?(repo['name'])
+      Dir.chdir(repo['name']) do
+        # TODO: Build and install the mod
+        # TODO: Create simple log file that shows what happened in build
+      end
+    end
+  end
 
   {}.to_json
 end
