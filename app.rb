@@ -24,7 +24,7 @@ post '/payload' do
   
   # Now let's manage everything in a separate thread
   Thread.new do
-    now = `date +%F_%H_%M`
+    now = `date +%F_%H_%M`.strip
     output = "#{repo['name']}_build_log_#{now}.txt\n"
     
     Dir.chdir('/home/minecraft/llmods') do
@@ -50,7 +50,8 @@ post '/payload' do
     Dir.chdir('/home/minecraft/public_html/public')
     `mkdir #{repo['name']}` unless File.directory?(repo['name'])
     Dir.chdir(repo['name'])
-    File.open("#{repo['name']}_#{now}.log", 'w') { |f| f.puts output }
+    File.open("#{repo['name'].strip}_#{now.strip}.log", 'w') { |f| f.puts output }
+    `rake restart`
   end
 
   {}.to_json

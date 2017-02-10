@@ -6,6 +6,14 @@
 	<body>
 		<h1>Andre and Quinn's Dev Server</h1>
 		<p>This is Andre and Quinn's development server. Its sole purpose is to
-		offer a space where Andre and Quinn can develop mods.</p>
+		  offer a space where Andre and Quinn can develop mods.</p>
+		<h2>Build Logs</h2>
+		<% Dir['public/*'].each do |dir| %>
+		  <% Dir.chdir(dir) do %>
+		    <% Dir['*.log'].each do |file| %>
+		      <p><a href="<%= dir.gsub('public/','') %>/<%= file %>"><%= file %></a></p>
+		    <% end %>
+		  <% end %>
+		<% end %>
 	</body>
 </html>
